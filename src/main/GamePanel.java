@@ -1,5 +1,7 @@
 package main;
 
+import entities.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +10,7 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16; //16x16 tile size
     final int scale = 3;
 
-    final int tileSize = originalTileSize * scale; // 48x48 pixels
+    final public int tileSize = originalTileSize * scale; // 48x48 pixels
     final int maxScreenCol = 16;
     final int maxScreenRow = 12;
     final int screenWidth = tileSize * maxScreenCol; // 768 pixels
@@ -18,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
+    Player player = new Player(this, keyHandler);
 
     //Set player's default position
     int playerX = 100;
@@ -73,18 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-        if(keyHandler.upPressed){
-            playerY -= playerSpeed;
-        }
-        else if(keyHandler.downPressed){
-            playerY += playerSpeed;
-        }
-        else if(keyHandler.leftPressed){
-            playerX -= playerSpeed;
-        }
-        else if(keyHandler.rightPressed){
-            playerX += playerSpeed;
-        }
+        player.update();
     }
 
     public void paintComponent(Graphics graphics){
@@ -92,10 +84,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D graphics2D = (Graphics2D)graphics;
 
-        graphics2D.setColor(Color.white);
-
-        //Draw Rectangle
-        graphics2D.fillRect(playerX, playerY, tileSize, tileSize);
+        player.draw(graphics2D);
 
         //Dispose of this graphics context and release any system resources using it.
         graphics2D.dispose();
