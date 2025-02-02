@@ -58,7 +58,7 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            while (col < gamePanel.maxWorldCol && row < gamePanel.maxScreenRow){
+            while (col < gamePanel.maxWorldCol && row < gamePanel.maxWorldRow){
                 String line = bufferedReader.readLine();
 
                 while (col < gamePanel.maxWorldCol){
@@ -82,24 +82,24 @@ public class TileManager {
     }
 
     public void draw(Graphics2D graphics2D){
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
+        int worldCol = 0;
+        int worldRow = 0;
 
-        while(col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow){
+        while(worldCol < gamePanel.maxWorldCol && worldRow < gamePanel.maxWorldRow){
 
-            int tileNum = mapTileNumber[col][row];
+            int tileNum = mapTileNumber[worldCol][worldRow];
 
-            graphics2D.drawImage(tiles[tileNum].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-            col++;
-            x += gamePanel.tileSize;
+            int worldX = worldCol * gamePanel.tileSize;
+            int worldY = worldRow * gamePanel.tileSize;
+            int screenX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
+            int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
 
-            if(col == gamePanel.maxScreenCol){
-                col = 0;
-                x = 0;
-                row++;
-                y += gamePanel.tileSize;
+            graphics2D.drawImage(tiles[tileNum].image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+            worldCol++;
+
+            if(worldCol == gamePanel.maxWorldCol){
+                worldCol = 0;
+                worldRow++;
             }
         }
     }
