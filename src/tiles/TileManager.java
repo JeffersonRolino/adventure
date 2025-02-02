@@ -18,10 +18,10 @@ public class TileManager {
     public TileManager(GamePanel gamePanel){
         this.gamePanel = gamePanel;
         tiles = new Tile[10];
-        mapTileNumber = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
+        mapTileNumber = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
 
         getTileImage();
-        loadMap("/maps/map01.txt");
+        loadMap("/maps/world01.txt");
     }
 
     public void getTileImage(){
@@ -58,10 +58,10 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            while (col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow){
+            while (col < gamePanel.maxWorldCol && row < gamePanel.maxScreenRow){
                 String line = bufferedReader.readLine();
 
-                while (col < gamePanel.maxScreenCol){
+                while (col < gamePanel.maxWorldCol){
                     String[] numbers = line.split(" ");
 
                     int num = Integer.parseInt(numbers[col]);
@@ -69,7 +69,7 @@ public class TileManager {
                     mapTileNumber[col][row] = num;
                     col++;
                 }
-                if(col == gamePanel.maxScreenCol){
+                if(col == gamePanel.maxWorldCol){
                     col = 0;
                     row++;
                 }
