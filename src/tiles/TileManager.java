@@ -21,7 +21,7 @@ public class TileManager {
         mapTileNumber = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
 
         getTileImage();
-        loadMap();
+        loadMap("/maps/map01.txt");
     }
 
     public void getTileImage(){
@@ -40,9 +40,9 @@ public class TileManager {
         }
     }
 
-    public void loadMap(){
+    public void loadMap(String filePath){
         try {
-            InputStream inputStream = getClass().getResourceAsStream("/maps/map01.txt");
+            InputStream inputStream = getClass().getResourceAsStream(filePath);
             assert inputStream != null;
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -79,7 +79,10 @@ public class TileManager {
         int y = 0;
 
         while(col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow){
-            graphics2D.drawImage(tiles[0].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+
+            int tileNum = mapTileNumber[col][row];
+
+            graphics2D.drawImage(tiles[tileNum].image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
             col++;
             x += gamePanel.tileSize;
 
