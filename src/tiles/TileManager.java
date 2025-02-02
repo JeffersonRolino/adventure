@@ -21,6 +21,7 @@ public class TileManager {
         mapTileNumber = new int[gamePanel.maxScreenCol][gamePanel.maxScreenRow];
 
         getTileImage();
+        loadMap();
     }
 
     public void getTileImage(){
@@ -35,6 +36,38 @@ public class TileManager {
             tiles[2].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/water.png")));
 
         } catch (IOException exception){
+            exception.printStackTrace();
+        }
+    }
+
+    public void loadMap(){
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/maps/map01.txt");
+            assert inputStream != null;
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+            int col = 0;
+            int row = 0;
+
+            while (col < gamePanel.maxScreenCol && row < gamePanel.maxScreenRow){
+                String line = bufferedReader.readLine();
+
+                while (col < gamePanel.maxScreenCol){
+                    String[] numbers = line.split(" ");
+
+                    int num = Integer.parseInt(numbers[col]);
+
+                    mapTileNumber[col][row] = num;
+                    col++;
+                }
+                if(col == gamePanel.maxScreenCol){
+                    col = 0;
+                    row++;
+                }
+            }
+            bufferedReader.close();
+
+        } catch (Exception exception){
             exception.printStackTrace();
         }
     }
