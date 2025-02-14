@@ -31,7 +31,10 @@ public class GamePanel extends JPanel implements Runnable {
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
     public CollisionDetector collisionDetector = new CollisionDetector(this);
+    public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
+
+    public SuperObject[] obj = new SuperObject[10];
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -39,6 +42,10 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
+    }
+
+    public void setupGame(){
+        assetSetter.setObject();
     }
 
     public void startGameThread(){
