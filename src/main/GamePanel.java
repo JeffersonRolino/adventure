@@ -1,6 +1,7 @@
 package main;
 
 import entities.Player;
+import objects.SuperObject;
 import tiles.TileManager;
 
 import javax.swing.*;
