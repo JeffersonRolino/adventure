@@ -100,6 +100,14 @@ public class GamePanel extends JPanel implements Runnable {
         //Drawing tile first for rendering order purposes...
         tileManager.draw(graphics2D);
 
+        //Object
+        for(int i = 0; i < obj.length; i++){
+            if(obj[i] != null){
+                obj[i].draw(graphics2D, this);
+            }
+        }
+
+        //Player
         player.draw(graphics2D);
 
         //Dispose of this graphics context and release any system resources using it.
