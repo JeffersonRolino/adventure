@@ -56,6 +56,39 @@ public class CollisionDetector {
                 }
                 break;
         }
+    }
 
+    public int checkObject(Entity entity, boolean player){
+        int index = 999;
+
+        for (int i = 0; i < gamePanel.obj.length; i++) {
+            if(gamePanel.obj[i] != null){
+                //Get entity's solid area position
+                entity.solidArea.x = entity.worldX + entity.solidArea.x;
+                entity.solidArea.y = entity.worldY + entity.solidArea.y;
+
+                //Get the object's solid area position
+                gamePanel.obj[i].solidArea.x = gamePanel.obj[i].worldX + gamePanel.obj[i].solidArea.x;
+                gamePanel.obj[i].solidArea.y = gamePanel.obj[i].worldY + gamePanel.obj[i].solidArea.y;
+
+                switch(entity.direction){
+                    case "up":
+                        entity.solidArea.y -= entity.speed;
+                        break;
+                    case "down":
+                        entity.solidArea.y += entity.speed;
+                        break;
+                    case "left":
+                        entity.solidArea.x -= entity.speed;
+                        break;
+                    case "right":
+                        entity.solidArea.x += entity.speed;
+                        break;
+                }
+
+            }
+        }
+
+        return index;
     }
 }
