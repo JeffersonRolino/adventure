@@ -74,6 +74,9 @@ public class Player extends Entity {
             collisionOn = false;
             gamePanel.collisionDetector.checkTile(this);
 
+            //CHECK OBJECT COLLISION
+            int objIndex = gamePanel.collisionDetector.checkObject(this, true);
+
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if(!collisionOn){
                 switch (direction){

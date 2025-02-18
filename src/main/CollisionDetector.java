@@ -74,18 +74,34 @@ public class CollisionDetector {
                 switch(entity.direction){
                     case "up":
                         entity.solidArea.y -= entity.speed;
+                        if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)){
+                            System.out.println("Up collision!");
+                        }
                         break;
                     case "down":
                         entity.solidArea.y += entity.speed;
+                        if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)){
+                            System.out.println("Down collision!");
+                        }
                         break;
                     case "left":
                         entity.solidArea.x -= entity.speed;
+                        if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)){
+                            System.out.println("Left collision!");
+                        }
                         break;
                     case "right":
                         entity.solidArea.x += entity.speed;
+                        if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)){
+                            System.out.println("Right collision!");
+                        }
                         break;
                 }
 
+                entity.solidArea.x = entity.solidAreaDefaultX;
+                entity.solidArea.y = entity.solidAreaDefaultY;
+                gamePanel.obj[i].solidArea.x = gamePanel.obj[i].solidAreaDefaultX;
+                gamePanel.obj[i].solidArea.y = gamePanel.obj[i].solidAreaDefaultY;
             }
         }
 
