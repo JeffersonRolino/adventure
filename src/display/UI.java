@@ -12,6 +12,7 @@ public class UI {
     BufferedImage keyImage;
     public boolean messageOn = false;
     public String message = "";
+    int messageCounter = 0;
 
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -35,6 +36,13 @@ public class UI {
         if(messageOn){
             graphics2D.setFont(graphics2D.getFont().deriveFont(30F));
             graphics2D.drawString(message, gamePanel.tileSize / 2, gamePanel.tileSize * 5);
+
+            messageCounter++;
+
+            if(messageCounter > 120){
+                messageCounter = 0;
+                messageOn = false;
+            }
         }
     }
 }

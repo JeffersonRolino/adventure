@@ -168,13 +168,17 @@ public class Player extends Entity {
                         gamePanel.playSoundEffect(3);
                         gamePanel.obj[index] = null;
                         hasKey--;
+                        gamePanel.ui.showMessage("You open the door!");
                     }
-                    System.out.println("Key: " + hasKey);
+                    else {
+                        gamePanel.ui.showMessage("You need a key!");
+                    }
                     break;
                 case "Boots":
                     gamePanel.playSoundEffect(2);
                     speed += 1;
                     gamePanel.obj[index] = null;
+                    gamePanel.ui.showMessage("Speed up!");
                     break;
             }
         }
