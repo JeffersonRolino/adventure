@@ -75,25 +75,45 @@ public class CollisionDetector {
                     case "up":
                         entity.solidArea.y -= entity.speed;
                         if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)){
-                            System.out.println("Up collision!");
+                            if(gamePanel.obj[i].collision){
+                                entity.collisionOn = true;
+                            }
+                            if(player){
+                                index = i;
+                            }
                         }
                         break;
                     case "down":
                         entity.solidArea.y += entity.speed;
                         if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)){
-                            System.out.println("Down collision!");
+                            if(gamePanel.obj[i].collision){
+                                entity.collisionOn = true;
+                            }
+                            if(player){
+                                index = i;
+                            }
                         }
                         break;
                     case "left":
                         entity.solidArea.x -= entity.speed;
                         if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)){
-                            System.out.println("Left collision!");
+                            if(gamePanel.obj[i].collision){
+                                entity.collisionOn = true;
+                            }
+                            if(player){
+                                index = i;
+                            }
                         }
                         break;
                     case "right":
                         entity.solidArea.x += entity.speed;
                         if(entity.solidArea.intersects(gamePanel.obj[i].solidArea)){
-                            System.out.println("Right collision!");
+                            if(gamePanel.obj[i].collision){
+                                entity.collisionOn = true;
+                            }
+                            if(player){
+                                index = i;
+                            }
                         }
                         break;
                 }
