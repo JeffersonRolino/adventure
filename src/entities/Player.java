@@ -16,6 +16,8 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
+    int hasKey = 0;
+
     public Player(GamePanel gamePanel, KeyHandler keyHandler){
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
@@ -76,6 +78,7 @@ public class Player extends Entity {
 
             //CHECK OBJECT COLLISION
             int objIndex = gamePanel.collisionDetector.checkObject(this, true);
+            pickUpObject(objIndex);
 
             //IF COLLISION IS FALSE, PLAYER CAN MOVE
             if(!collisionOn){
@@ -147,5 +150,28 @@ public class Player extends Entity {
         }
 
         graphics2D.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+    }
+
+    public void pickUpObject(int index){
+        if(index != 999){
+            String objectName = gamePanel.obj[index].name;
+
+            switch (objectName){
+                case "Key":
+                    hasKey++;
+                    gamePanel.obj[index] = null;
+                    System.out.println("Keys: " + hasKey);
+                    break;
+                case "Door":
+                    if(hasKey > 0){
+                        gamePanel.obj[index] = null;
+                        hasKey--;
+                    }
+                    System.out.println("Key: " + hasKey);
+                    break;
+            }
+
+
+        }
     }
 }
