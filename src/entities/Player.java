@@ -16,7 +16,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
-    int hasKey = 0;
+    public int hasKey = 0;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler){
         this.gamePanel = gamePanel;
@@ -161,7 +161,7 @@ public class Player extends Entity {
                     gamePanel.playSoundEffect(1);
                     hasKey++;
                     gamePanel.obj[index] = null;
-                    System.out.println("Keys: " + hasKey);
+                    gamePanel.ui.showMessage("You got a key!");
                     break;
                 case "Door":
                     if(hasKey > 0){

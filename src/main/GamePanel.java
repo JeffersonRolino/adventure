@@ -1,5 +1,6 @@
 package main;
 
+import display.UI;
 import entities.Player;
 import objects.SuperObject;
 import tiles.TileManager;
@@ -32,6 +33,8 @@ public class GamePanel extends JPanel implements Runnable {
     Sound soundEffects = new Sound();
     public CollisionDetector collisionDetector = new CollisionDetector(this);
     public AssetSetter assetSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
+
     Thread gameThread;
 
 
@@ -114,6 +117,9 @@ public class GamePanel extends JPanel implements Runnable {
 
         //Player
         player.draw(graphics2D);
+
+        //UI
+        ui.draw(graphics2D);
 
         //Dispose of this graphics context and release any system resources using it.
         graphics2D.dispose();
